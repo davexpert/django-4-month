@@ -1,0 +1,9 @@
+# created by virtualenv automatically
+*i
+idea/
+.idea/
+/.idea/
+/blog/__pychache__/
+/post/__pychaache__/
+**/_pycache_/
+__pycache__/
