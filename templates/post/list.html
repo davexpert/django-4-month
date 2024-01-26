@@ -9,9 +9,14 @@
  <div class="card" style="width: 18rem;">
     <img src="{{ post.photo }}" class="card-img-top" alt="...">
     <div class="card-body">
-      <h5 class="card-title">{{ product.name }} {{ product.price }}</h5>
+      <h5 class="card-title">{{ product.title }} {{ product.price }}</h5>
       <p class="card-text">{{ product.created_at }}</p>
-      <a href="{{ post.id }}/" class="btn btn-primary">Перейти</a>
+      {% for categorie in product.categories.all %}
+        <a href="#">
+            <span class="btn btn-secondary">#{{ categorie.title}}</span>
+        </a>
+      {% endfor %}
+      <a href="{{ product.id }}/" class="btn btn-primary">Перейти</a>
     </div>
   </div>
 {% endfor %}

@@ -4,7 +4,35 @@
 {% block content %}
 
 <h1>
-    {{ product.name }}
+    {{ product.title }}
 </h1>
+
+<p>
+    {{ product.content}}
+</p>
+
+<p>
+    {{ product.created_at}}
+</p>
+
+<h1>Reviews:</h1>
+
+{% for review in product.reviews.all %}
+    <p>
+        {{ review.text }}
+    </p>
+    <p>
+        {{ review.created_at }}
+    </p>
+
+{% endfor %}
+
+<h1>Categories:</h1>
+
+{% for categorie in product.categories.all %}
+    <p>
+        {{ categorie.title }}
+    </p>
+{% endfor %}
 
 {% endblock %}
