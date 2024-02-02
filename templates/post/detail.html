@@ -7,7 +7,7 @@
     {{ product.title }}
 </h1>
 
-<img src="/media/{{ post.photo }}">
+<img src="/media/{{ product.photo }}">
 
 <p>
     {{ product.content}}
@@ -28,6 +28,12 @@
     </p>
 
 {% endfor %}
+
+<form action="/products/{{ product.id }}/review/" method="post">
+    {% csrf_token %}
+    {{ review_form.as_p }}
+    <input type="submit" value="Create">
+</form>
 
 <h1>Categories:</h1>
 

@@ -7,7 +7,8 @@ class Categorie(models.Model):
         return f'{self.id} - {self.title}'
 
 class Product(models.Model):
-    photo = models.ImageField("Фото", upload_to="post_photos/%Y/%m/%d", null=True)
+    photo = models.ImageField(upload_to="post_photos/%Y/%m/%d", null=True,
+                              verbose_name="Фото")
     title = models.CharField(max_length=100)
     content = models.TextField(null=True, blank=True)
     price = models.FloatField(default=0)

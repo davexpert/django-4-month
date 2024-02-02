@@ -6,7 +6,7 @@ from post.models import Product, Review, Categorie
 # admin.site.register(Product)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["id", "title", "price", "created_at"]
+    list_display = ["id", "title", "price", "created_at", "updated_at"]
     list_display_links = ["id", "title"]
     search_fields = ["title", "content"]
     list_filter = ["created_at", "updated_at"]
