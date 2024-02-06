@@ -7,6 +7,12 @@ class Categorie(models.Model):
         return f'{self.id} - {self.title}'
 
 class Product(models.Model):
+    user = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+        related_name="products",
+        null=True
+    )
     photo = models.ImageField(upload_to="post_photos/%Y/%m/%d", null=True,
                               verbose_name="Фото")
     title = models.CharField(max_length=100)
@@ -29,10 +35,16 @@ class Product(models.Model):
 
 
 class Review(models.Model):
+    user = models.ForeignKey(
+        "auth.User",
+        on_delete=models.CASCADE,
+        related_name="reviews",
+        null=True
+    )
     product = models.ForeignKey(
         Product,
         on_delete=models.CASCADE,
-        related_name="reviews"
+        related_name="reviews",
     )
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)

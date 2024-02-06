@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from post.models import Product, Review, Categorie
 from post.forms import ProductCreateForm, ProductCreateForm2, ReviewCreateForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 def hello_view(request):
     if request.method == 'GET':
@@ -14,12 +15,15 @@ def main_page_view(request):
 
 def product_list_view(request):
     if request.method == 'GET':
-        products = Product.objects.all()
+        products = Product.objects.all().exclude(user=request.user)
 
-        return render(request,
-                      'post/list.html',
-                      context={'products': products}
-                      )
+        return render(
+            request,
+            'post/list.html',
+            context={'products': products}
+        )
+
+
 def product_detail_view(request, product_id):
     if request.method == 'GET':
         form = ReviewCreateForm()
@@ -34,6 +38,7 @@ def product_detail_view(request, product_id):
             context={'product': product, 'review_form': form}
         )
 
+
 def categories_list_view(request):
     if request.method == 'GET':
         categories = Categorie.objects.all()
@@ -44,6 +49,7 @@ def categories_list_view(request):
             {"categories": categories}
         )
 
+@login_required
 def product_create_view(request):
     if request.method == 'GET':
         context = {
@@ -74,6 +80,7 @@ def product_create_view(request):
             context=context
         )
 
+@login_required
 def review_create_view(request, product_id):
     if request.method == 'POST':
         form = ReviewCreateForm(request.POST)
@@ -81,6 +88,7 @@ def review_create_view(request, product_id):
         if form.is_valid():
             review = form.save(commit=False)
             review.product_id = product_id
+            review.user = request.user
             review.save()
 
         return redirect('product_detail', product_id=product_id)
