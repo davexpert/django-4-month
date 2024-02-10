@@ -17,6 +17,9 @@
     {{ product.created_at}}
 </p>
 
+{% if has_change_permission %}
+    <a href="/products/{{ product.id }}/update/">Update</a>
+{% endif %}
 <h1>Reviews:</h1>
 
 {% for review in product.reviews.all %}

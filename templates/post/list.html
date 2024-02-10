@@ -5,6 +5,28 @@
 
 <h1>Product list</h1>
 
+{% for categorie in categories %}
+    <a href="?categorie={{ categorie.id }}">
+        <span class="btn btn-secondary">#{{ categorie.title }}</span>
+    </a>
+{% endfor %}
+
+<h1>
+    Search
+</h1>
+
+<p>
+    <a href="?sort=created_at">Sort by created_at</a>
+    <a href="?sort=-created_at">Sort by created_at desc</a>
+    <a href="?sort=price">Sort by price</a>
+    <a href="?sort=-price">Sort by price desc</a>
+</p>
+
+<form action="" method="get">
+    <input type="text" name="search">
+    <input type="submit" value="Search">
+</form>
+
 {% for product in products %}
  <div class="card" style="width: 18rem;">
     <img src="/media/{{ product.photo }}" class="card-img-top" alt="...">
@@ -20,6 +42,13 @@
     </div>
   </div>
 {% endfor %}
+
+<div class="number" style="display: flex">
+    {% for page in max_pages %}
+        <a href="?page={{ page}}" method="GET"><h1>{{ page }}</h1></a>
+    {% endfor %}
+</div>
+
 
 {% endblock %}
 
